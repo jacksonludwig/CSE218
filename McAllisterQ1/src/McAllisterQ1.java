@@ -13,7 +13,7 @@ public class McAllisterQ1
         
         //3- for(int i= 0; i<n; i++) // every item
              {
-                // input and price and parse inputan item name
+                // input a name and price and parse the price.
                 // add the new price to the total
                 // if statement to set peasEntered to true
                 //   that uses name[i].equalsIgnoreCase("peas");
