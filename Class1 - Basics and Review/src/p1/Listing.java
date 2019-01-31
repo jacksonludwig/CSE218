@@ -10,10 +10,22 @@ package p1;
  * @author Jackson
  */
 public class Listing {
-    private int age = 10;
+    private int age;
+    
+    public Listing() {
+        age = 10;
+    }
+    
+    public Listing(int age) {
+        this.age = age;
+    }
     
     public void show() {
-        System.out.println(toString());
+        System.out.println(this);
+    }
+    
+    public Listing clone() {
+        return new Listing(age); // age is that of the object who invoked the clone method
     }
     
     @Override

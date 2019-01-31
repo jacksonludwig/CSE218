@@ -29,6 +29,9 @@ public class Demo {
         if(peasEntered) {
             total /= size;
             JOptionPane.showMessageDialog(null, "The average price is: " + String.format("%.2f", total));
+        } else {
+            JOptionPane.showMessageDialog(null, "No Average Output");
         }
+        
     }
 }

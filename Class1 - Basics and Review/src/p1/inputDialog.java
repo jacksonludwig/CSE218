@@ -13,5 +13,18 @@ public class inputDialog {
         Listing listing = new Listing();
         
         System.out.println(listing);
+        
+        Listing[] listings;
+        listings = new Listing[3];
+        
+        for(int i = 0; i < 3; i++) {
+            listings[i] = new Listing(i);
+            System.out.println(listings[i]);
+        }
+        
+        Listing tom = listings[2].clone();
+        System.out.println(tom);
+        
+        
     }
 }
