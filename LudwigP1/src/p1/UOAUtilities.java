@@ -18,6 +18,18 @@ public class UOAUtilities {
         size = s;
     }//end of constructor
 
+//    public int getNext() {
+//        return next;
+//    }
+//
+//    public int getSize() {
+//        return size;
+//    }
+//
+//    public StudentListing[] getStudentListing() {
+//        return data;
+//    }
+
     public boolean insert(StudentListing newStudentListing) {
         if (next == size) // the structure is full
         {

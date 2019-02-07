@@ -46,7 +46,7 @@ public class UOAUtilities {
         //deep copy the node's information into the client's node
         node = data[i].deepCopy();
         // move the node up one position in the array, unless it is the first node
-        if (i != 0) // bubble-up accessed node
+        if (i != 0) // bubble-up accessed node (speeds up aquisition of most likely calls by putting them higher in the array)
         {
             temp = data[i - 1];
             data[i - 1] = data[i];
@@ -64,7 +64,7 @@ public class UOAUtilities {
         {
             return false;
         }
-        //move the last node into the deleted node's position
+        //move the last node into the deleted node's position (trick to avoid shifting every piece of data up one spot)
         data[i] = data[next - 1];
         data[next - 1] = null;
         next = next - 1;
