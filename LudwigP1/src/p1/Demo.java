@@ -2,7 +2,6 @@ package p1;
 
 // MUST BE CHANGED: SHOULD BE GPA; NO GETS OR SETS -- ADD EXPAND TO DATA STRUCT CLASS
 // e.g.: private boolean expand (fix utilities and studentlisting)...
-
 import javax.swing.JOptionPane;
 
 public class Demo {
@@ -51,7 +50,7 @@ public class Demo {
                 case 4:
                     student = new StudentListing();
                     student.inputStudent();
-                    if (listings.update(JOptionPane.showInputDialog("Enter a student name to update: "), student)) {
+                    if (listings.update(JOptionPane.showInputDialog("Enter a student name to replace: "), student)) {
                         JOptionPane.showMessageDialog(null, "Student information updated");
                     } else {
                         JOptionPane.showMessageDialog(null, "Student not found");

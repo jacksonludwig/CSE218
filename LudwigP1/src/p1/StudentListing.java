@@ -5,29 +5,29 @@ import javax.swing.JOptionPane;
 public class StudentListing {
 
     private String name;  // key field
-    private String address;
+    private String gpa;
     private String number;
 
     public StudentListing() {
         name = " ";
-        address = " ";
+        gpa = " ";
         number = " ";
     }
 
     public StudentListing(String n, String a, String num) {
         name = n;
-        address = a;
+        gpa = a;
         number = num;
     }
 
     public String toString() {
         return ("Name is " + name
-                + "\nAddress is " + address
+                + "\nGpa is " + gpa
                 + "\nNumber is " + number + "\n");
     }
 
     public StudentListing deepCopy() {
-        StudentListing clone = new StudentListing(name, address, number);
+        StudentListing clone = new StudentListing(name, gpa, number);
         return clone;
     }
 
@@ -35,14 +35,14 @@ public class StudentListing {
         return (name.compareTo(targetKey));
     }
 
-    public void setAddress(String a) // coded to demonstrate encapsulation
+    public void setGpa(String a) // coded to demonstrate encapsulation
     {
-        address = a;
+        gpa = a;
     }
 
     public void inputStudent() {
         name = JOptionPane.showInputDialog("Enter a name");
-        address = JOptionPane.showInputDialog("Enter an address");
+        gpa = JOptionPane.showInputDialog("Enter a gpa");
         number = JOptionPane.showInputDialog("Enter a number");
     }
 }
