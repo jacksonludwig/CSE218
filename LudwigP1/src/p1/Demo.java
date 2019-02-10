@@ -1,7 +1,5 @@
 package p1;
 
-// MUST BE CHANGED: SHOULD BE GPA; NO GETS OR SETS -- ADD EXPAND TO DATA STRUCT CLASS
-// e.g.: private boolean expand (fix utilities and studentlisting)...
 import javax.swing.JOptionPane;
 
 public class Demo {
@@ -24,13 +22,14 @@ public class Demo {
                     + "2 to fetch and output a student's information\n"
                     + "3 to delete a student's information\n"
                     + "4 to update a student's information\n"
-                    + "5 to output all of the student information in sorted order, and\n"
+                    + "5 to output all of the student information in unsorted order, and\n"
                     + "6 to exit the program."));
             switch (menuChoice) {
                 case 1:
                     student = new StudentListing();
                     student.inputStudent();
                     listings.insert(student);
+                    JOptionPane.showMessageDialog(null, "Operation Complete");
                     break;
                 case 2:
                     student = listings.fetch(JOptionPane.showInputDialog("Enter a student name to search for: "));
@@ -42,7 +41,7 @@ public class Demo {
                     break;
                 case 3:
                     if (listings.delete(JOptionPane.showInputDialog("Enter a student name to delete: "))) {
-                        JOptionPane.showMessageDialog(null, "Student deleted from database");
+                        JOptionPane.showMessageDialog(null, "Operation Complete");
                     } else {
                         JOptionPane.showMessageDialog(null, "Student not found");
                     }
@@ -51,7 +50,7 @@ public class Demo {
                     student = new StudentListing();
                     student.inputStudent();
                     if (listings.update(JOptionPane.showInputDialog("Enter a student name to replace: "), student)) {
-                        JOptionPane.showMessageDialog(null, "Student information updated");
+                        JOptionPane.showMessageDialog(null, "Operation Complete");
                     } else {
                         JOptionPane.showMessageDialog(null, "Student not found");
                     }
