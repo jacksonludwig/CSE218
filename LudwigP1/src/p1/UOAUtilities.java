@@ -18,17 +18,33 @@ public class UOAUtilities {
         size = s;
     }//end of constructor
 
-    public void expand() {
-        size *= 2;
-        StudentListing[] temp = new StudentListing[size];
-        System.arraycopy(data, 0, temp, 0, next);
-        data = temp;
+//    private boolean expand() {
+//        size *= 2;
+//        StudentListing[] temp = new StudentListing[size];
+//        System.arraycopy(data, 0, temp, 0, next);
+//        data = temp;
+//        return true;
+//    }
+    
+       private boolean expand() {
+        StudentListing[] temp = data;
+        data = new StudentListing[size * 2];
+        if(data == null) {
+            data = temp;
+            return false;
+        } else {
+            System.arraycopy(temp, 0, data, 0, temp.length);
+            size = data.length;
+            return true;
+        }
     }
 
     public boolean insert(StudentListing newStudentListing) {
         if (next == size) // the structure is full
         {
-            expand();
+            if (!expand()) {
+                return false;
+            }
         }
         data[next] = newStudentListing.deepCopy();  // store a deep copy of the client’s student
         if (data[next] == null) {

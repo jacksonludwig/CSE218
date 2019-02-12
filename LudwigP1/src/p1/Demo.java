@@ -28,8 +28,11 @@ public class Demo {
                 case 1:
                     student = new StudentListing();
                     student.inputStudent();
-                    listings.insert(student);
-                    JOptionPane.showMessageDialog(null, "Operation Complete");
+                    if(listings.insert(student)) {
+                        JOptionPane.showMessageDialog(null, "Operation Complete");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Operation Failed");
+                    }
                     break;
                 case 2:
                     student = listings.fetch(JOptionPane.showInputDialog("Enter a student name to search for: "));

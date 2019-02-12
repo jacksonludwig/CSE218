@@ -1,0 +1,63 @@
+Field: indivisible data.
+Node: Group of "related" data/fields of field.
+Key field: Contents of this field identifies a particular node. Identified by client NOT programmer.
+	(Can have more than one, i.e. phonenumber/name COULD be a key for a person and their address, salary, etc).
+
+Homogeneous data set: All nodes have the same fields ("look" the same).
+	Insert: adds node
+	Fetch: gets node
+	Delete: removes node
+	Update: replace info of node
+Two Access modes: Key field (i.e. fetch(Jones)) and Node number (i.e. fetch(10), like arrays)/fetch();
+
+3 Classes for each program in CSE218:
+	Node Definition Class
+	Data Structure Class
+	Client Application Class
+----
+Space complexity: Measure of how efficiently the structure uses memory. 
+	Quantified as: density, D
+		D= information bytes / (total bytes), or:
+		D= information bytes / (information bytes + overhead)
+			e.g.: 20000/20004 = .96 density
+	Maximum: 1 (better)
+	Minimum: 0 (worse)
+	Normally acceptable densities are usually 0.8+
+		This means that 80% of the memory used is from the information bytes.
+
+Speed Complexity: Speed of a data structure's operation algorithms.
+	Two measurements: 
+		Relative Speed: which of several algorithms is the fastest.
+			Algorithms analyzed to determine Big-O (Order of magnitude) value.
+				Fastest algorithm is the one with the SMALLEST Big-O value.
+					Written as O(...), e.g. O(log2n).
+					e.g.: 
+						f(n) = 200n + 1000 -> O(n)
+						g(n) = 30 + 10n + 2n^2 -> O(n^2)
+		Absolute Speed: actual speed of an algorithm in seconds on a platform.
+----
+
+Restricted Structures: 
+	Two:
+		Stack (Top-Bottom)
+			LIFO: Last In First Out.
+			push = insert
+				a failed push is an overflow error.***
+				clones made.
+			pop = fetch+delete
+				a failed pop is an underflow error.***
+				no need for clones.
+			top = place to pop from next.
+			
+			other common operations:
+				isEmpty, isFull, initialize, showAll, peek***, expand.
+		Queue (Front-Rear)
+			FIFO: First in First Out.
+	Operations are RESTRICTED: 
+		Only insert and a combination of fetch + delete. May add others rarely.
+		Access modes restricted as well: Node number (can't specify which node: just LIFO or FIFO).
+	Applications:
+		Run time evaluation of math strings:
+			infix notation used in code, but POSTFIX notation used at run time.
+				[6 * 5] in prefix is [6 5 *] in postfix.
+	

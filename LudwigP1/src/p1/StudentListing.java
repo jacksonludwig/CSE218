@@ -6,28 +6,28 @@ public class StudentListing {
 
     private String name;  // key field
     private String gpa;
-    private String number;
+    private String id;
 
     public StudentListing() {
         name = " ";
         gpa = " ";
-        number = " ";
+        id = " ";
     }
 
     public StudentListing(String n, String a, String num) {
         name = n;
         gpa = a;
-        number = num;
+        id = num;
     }
 
     public String toString() {
         return ("Name is " + name
                 + "\nGpa is " + gpa
-                + "\nNumber is " + number + "\n");
+                + "\nId is " + id + "\n");
     }
 
     public StudentListing deepCopy() {
-        StudentListing clone = new StudentListing(name, gpa, number);
+        StudentListing clone = new StudentListing(name, gpa, id);
         return clone;
     }
 
@@ -35,14 +35,9 @@ public class StudentListing {
         return (name.compareTo(targetKey));
     }
 
-    public void setGpa(String a) // coded to demonstrate encapsulation
-    {
-        gpa = a;
-    }
-
     public void inputStudent() {
         name = JOptionPane.showInputDialog("Enter a name");
         gpa = JOptionPane.showInputDialog("Enter a gpa");
-        number = JOptionPane.showInputDialog("Enter a number");
+        id = JOptionPane.showInputDialog("Enter an id");
     }
 }
