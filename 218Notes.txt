@@ -50,9 +50,22 @@ Restricted Structures:
 			top = place to pop from next.
 			
 			other common operations:
-				isEmpty, isFull, initialize, showAll, peek***, expand.
+				isEmpty(), isFull(), initialize(), showAll(), peek()***, expand().
 		Queue (Front-Rear)
 			FIFO: First in First Out.
+			enqueue = insert
+				failed enqueue is also overflow.
+			dequeue = fetch/delete
+				failed dequeue is also underflow.
+			front = place to dequeue from next.
+			rear = place to enqueue into next.
+
+			other common operations:
+				isEmpty(), isFull(), initialize(), peek(), showall(), expand()
+			
+			"Circular" queues are used to use garbage collection effectively.
+				when rear (or front) equals size - 1, set rear (or front) to 0.
+					Use rear = (rear + 1) % size.
 	Operations are RESTRICTED: 
 		Only insert and a combination of fetch + delete. May add others rarely.
 		Access modes restricted as well: Node number (can't specify which node: just LIFO or FIFO).
