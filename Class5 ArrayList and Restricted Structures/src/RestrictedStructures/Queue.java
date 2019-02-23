@@ -15,7 +15,8 @@ public class Queue {
 
     public boolean enqueue(Node node) {
         if (numberOfNodes == size) {
-            return false;
+//            return false;
+            expand();
         }
         data[rear] = node.deepCopy(); // remember to use clones to ensure encapsulation and security.
         rear = (rear + 1) % size;
@@ -32,24 +33,26 @@ public class Queue {
         numberOfNodes--;
         return data[f]; // no need for clone.
     }
-    
+
     private boolean expand() {
         Node[] temp = new Node[size * 2];
-        int j = front;
-        for(int i = 1; i <= size; i++) {
-            data[i - 1] = temp[j];
-            j = (j + 1) % size;
-        } // not done: must add what was from last expand.
-        rear = size;
+        for (int i = 0; i < numberOfNodes; i++) {
+            temp[i] = data[front];
+            front = (front + 1) % size;
+        }
+        rear = numberOfNodes;
         front = 0;
         size *= 2;
+        data = temp;
         return true;
     }
-    
+
     public void showAll() {
         int i = front;
-        for(int c = 1; c <= front; c++) {
-            System.out.println(); // also didn't finish
+        for (int c = 0; c < numberOfNodes; c++) {
+            System.out.println(data[i]);
+            i = (i + 1) % size;
         }
+        System.out.println(data.length);
     }
 }
