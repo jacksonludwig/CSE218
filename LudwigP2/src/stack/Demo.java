@@ -1,4 +1,4 @@
-package stackPractice;
+package stack;
 
 import java.util.*;
 import javax.swing.*;

@@ -53,6 +53,5 @@ public class Queue {
             System.out.println(data[i]);
             i = (i + 1) % size;
         }
-        System.out.println(data.length);
     }
 }
