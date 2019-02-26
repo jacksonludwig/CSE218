@@ -65,7 +65,7 @@ Restricted Structures:
 			
 			"Circular" queues are used to use garbage collection effectively.
 				when rear (or front) equals size - 1, set rear (or front) to 0.
-					Use rear = (rear + 1) % size.
+					Use front = (front + 1) % size.
 	Operations are RESTRICTED: 
 		Only insert and a combination of fetch + delete. May add others rarely.
 		Access modes restricted as well: Node number (can't specify which node: just LIFO or FIFO).
@@ -73,4 +73,49 @@ Restricted Structures:
 		Run time evaluation of math strings:
 			infix notation used in code, but POSTFIX notation used at run time.
 				[6 * 5] in prefix is [6 5 *] in postfix.
+---------------------------
+Generics:
+	-used to write a method or a class in a way that allows the client code to specify the types of:
+		-a method's parameters & returned value,
+		-a class's data members, when
+		the client invokes the method or declares a class instance.
+	-increases reusability
 	
+	instances of Generic Classes - client side of generics (API's collection):
+		Stack<E>, HashMap<L,V>....
+
+	Syntax of Generic void methods:
+		signature:
+		|	public <T1, T2...> void methodName(T1 param1, T2...)	 |
+		|		^type parameter list         ^type placeholders  |
+		__________________________________________________________________
+		parameter list must contaian all of the placeholders, each separated by a comma.
+		Invocation (client side): NO VISIBLE CHANGES.
+		Can contain non-generic types as well.
+	
+		Generic array syntax:
+			same as non array generic parameters, but includes "[]".
+			e.g. 
+				public <T1, T2...> T1[] methodName(T1 param1...) to return array.
+				public <T1, T2...> T2 methodName(T2[] param1...) to take in array.
+			Invocation is still the same, EXCEPT for primitive data (generic arrays need Double, Integer, etc).
+
+	Operating on generic objects:
+		Translator must be able to verify the method's signature.
+			**Can use, and override, public methods in Object
+			**Can use, and override, public methods in interfaces.
+		e.g. 
+		public static <T extends Comparable <T>> void methodName(T a, T b) {
+			System.out.println(a.equals(b));
+			System.out.println(a.compareTo(b));
+		}
+
+	Generic Classes:
+		Must contain a generic type parameter list
+			In heading, immediately after class name.
+				e.g.
+				public class GenericClass <T1, T2, ...>
+			Can, and often do, contain generic methods using the placeholdders,
+				data members whose types are the placeholders, etc.
+			
+				
