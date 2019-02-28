@@ -117,5 +117,37 @@ Generics:
 				public class GenericClass <T1, T2, ...>
 			Can, and often do, contain generic methods using the placeholdders,
 				data members whose types are the placeholders, etc.
+--------------------
+
+Linked Lists:
+	Linked lists DO NOT waste space, unlike Array-based Structures 
+		(e.g. space for full array is allocated upon creation, even if it isn't used right away).
+	Linked lists expand faster, and can contract quickly.
+		no empty spaces left after deletion.
+	Linked lists do NOT require contiguous memory (can be fragmented), unlike Arrays.
+		Allows more efficient use of memory.
+	So they are slightly slower, less dense...
+
+	Two common characteristics of all linked lists:
+		Every node has an extra field that stores another node's address, called a linked field (often called "next").
+			This linked field contains the address to go to next (needed since it's not contiguous)
+		Every node's address is stored in at least one other node so it can be accessed.
+
+	Singly Linked List:
+		-Each node has one link field
+			-There is a unique first node (nothing before)
+			-There is a unique last node (nothing after)
+			-For all other nodes: a node is preceded by one node, and followed by one node.
+				e.g.: beginning/"header"/dummy node0 -> node1 -> node2 -> node3 -> node4/end/"null"
+		-Private Reference Data Members with Linked Lists:
+			-private inner classes -- NO SETS OR GETS IN ANY LINKED LISTS. Use inners instead of separate classes.
+				-private code will be shared
+			e.g.:
+				public class SinglyLinkedList {
+					// private code
+					public.insert()...etc.
+					public class Node {
+					    // private code
+					}
+				}
 			
-				

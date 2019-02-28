@@ -2,12 +2,12 @@ package p1;
 
 public class Queue<T> {
 
-    private int numberOfTs, rear, front, size;
+    private int numberOfNodes, rear, front, size;
     private T[] data;
     private static final int DEFAULT_AMOUNT = 100;
 
     public Queue() {
-        numberOfTs = 0;
+        numberOfNodes = 0;
         rear = 0;
         front = 0;
         size = DEFAULT_AMOUNT;
@@ -15,7 +15,7 @@ public class Queue<T> {
     }
 
     public Queue(int size) {
-        numberOfTs = 0;
+        numberOfNodes = 0;
         rear = 0;
         front = 0;
         this.size = size;
@@ -31,7 +31,7 @@ public class Queue<T> {
         GenericInterface node = (GenericInterface) student;
         data[rear] = (T) node.deepCopy();
         rear = (rear + 1) % size;
-        numberOfTs++;
+        numberOfNodes++;
         return true;
     }
 
@@ -41,17 +41,17 @@ public class Queue<T> {
         }
         int f = front;
         front = (front + 1) % size;
-        numberOfTs--;
+        numberOfNodes--;
         return data[f];
     }
 
     private boolean expand() {
         T[] temp = (T[]) new Object[size * 2];
-        for (int i = 0; i < numberOfTs; i++) {
+        for (int i = 0; i < numberOfNodes; i++) {
             temp[i] = data[front];
             front = (front + 1) % size;
         }
-        rear = numberOfTs;
+        rear = numberOfNodes;
         front = 0;
         size *= 2;
         data = temp;
@@ -64,21 +64,21 @@ public class Queue<T> {
             return false;
         }
         size = DEFAULT_AMOUNT;
-        numberOfTs = 0;
+        numberOfNodes = 0;
         front = 0;
         rear = 0;
         return true;
     }
 
     public boolean isEmpty() {
-        if (numberOfTs == 0) {
+        if (numberOfNodes == 0) {
             return true;
         }
         return false;
     }
 
     public boolean isFull() {
-        if (numberOfTs == size) {
+        if (numberOfNodes == size) {
             return true;
         }
         return false;
@@ -94,7 +94,7 @@ public class Queue<T> {
 
     public void showAll() {
         int i = front;
-        for (int c = 0; c < numberOfTs; c++) {
+        for (int c = 0; c < numberOfNodes; c++) {
             System.out.println(data[i]);
             i = (i + 1) % size;
         }
