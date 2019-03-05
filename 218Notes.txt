@@ -140,14 +140,16 @@ Linked Lists:
 			-For all other nodes: a node is preceded by one node, and followed by one node.
 				e.g.: beginning/"header"/dummy node0 -> node1 -> node2 -> node3 -> node4/end/"null"
 		-Private Reference Data Members with Linked Lists:
-			-private inner classes -- NO SETS OR GETS IN ANY LINKED LISTS. Use inners instead of separate classes.
+			-private inner classes -- NO SETS OR GETS IN ANY LINKED LISTS. Use inner "Node" class and separate Node definition class.
 				-private code will be shared
 			e.g.:
 				public class SinglyLinkedList {
 					// private code
-					public.insert()...etc.
+					public boolean insert()...etc.
 					public class Node {
 					    // private code
 					}
 				}
+
+		-h/header is only variable in SinglyLinkedList class (more can be in node class)
 			

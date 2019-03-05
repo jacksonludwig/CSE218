@@ -12,6 +12,7 @@ public class Demo {
             list.enqueue(student);
         }
         JOptionPane.showMessageDialog(null, "" + list.dequeue() + "\n" + list.dequeue() + "\n" + list.dequeue());
+        JOptionPane.showMessageDialog(null, "The Queue is now empty");
     }
 
 }
