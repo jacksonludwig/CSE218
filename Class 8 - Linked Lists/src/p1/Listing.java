@@ -30,5 +30,9 @@ public class Listing {
     {
         address = a;
     }
+    
+    public String getName() {
+        return name;
+    }
 }// end of class Listing
 

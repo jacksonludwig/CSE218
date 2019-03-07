@@ -4,9 +4,6 @@ package p1;
 // d = i / (i + o)
 // for list with 4 items:
 // d = (nw)/((nw) + n*8 + 12)
-
-
-
 public class SinglyLinkedList {
 
     private Node h;  // list header

@@ -1,3 +1,19 @@
+Misc:
+-------
+Compares objects.
+int compareTo([object]) { } // from interface
+
+	e.g.: a.compareTo(b);
+
+	returns:			when:
+	0				a equals b
+	negative			a < b
+	positive			a > b
+----------
+
+
+
+
 Field: indivisible data.
 Node: Group of "related" data/fields of field.
 Key field: Contents of this field identifies a particular node. Identified by client NOT programmer.
@@ -118,7 +134,6 @@ Generics:
 			Can, and often do, contain generic methods using the placeholdders,
 				data members whose types are the placeholders, etc.
 --------------------
-
 Linked Lists:
 	Linked lists DO NOT waste space, unlike Array-based Structures 
 		(e.g. space for full array is allocated upon creation, even if it isn't used right away).
@@ -146,10 +161,70 @@ Linked Lists:
 				public class SinglyLinkedList {
 					// private code
 					public boolean insert()...etc.
-					public class Node {
+					private class Node {
 					    // private code
 					}
 				}
 
 		-h/header is only variable in SinglyLinkedList class (more can be in node class)
-			
+		For sorted singly linked list:
+			-insert will be slower.
+			-fetch and delete will be twice as fast on average.	
+			-one pointer chasing the other
+***************
+   Sorted methods:
+    public boolean insertSorted(Listing newListing) {
+        Node q = h;
+        Node p = h.next;
+        while (p != null && (p.l.compareTo(newListing.getKey()) < 0)) {
+            q = p;
+            p = p.next;
+        }
+        if (p != null) {
+            Node n = new Node();
+            n.l = newListing.clone();
+            n.next = p;
+            q.next = n;
+            return true;
+        }
+        return false;
+    }
+    public boolean deleteSorted(String targetKey) { // same for fetch
+        Node q = h;
+        Node p = h.next;
+        while (p != null && !(p.l.compareTo(targetKey) == 0)) {
+            q = p;
+            p = p.next;
+        }
+        if (p != null && !(p.l.compareTo(targetKey) == 0)) { // a hit
+            q.next = p.next;
+            return true;
+        } else {
+            return false;
+        }
+    }
+**************
+
+	Doubly linked list:
+		-Same as singly linked but have a "back" pointer so traversal can go in both directions.
+		-change delete, insert for P3.	
+		-showAllBackwards();
+	Density:
+	nw / ((nw) + 2n + 16)
+	1 / (1 + 12n/nw + 16/nw)
+
+--------------
+
+Hashing:
+	-Very fast
+		-NO SEARCHING -- O(1)
+		-h, a manthematical function is used instead -- HASHING function.
+		-NEED preproccesing algorithm
+			-changes non-numeric key, k, into a numeric pseudo key, pk.
+				-key -> preprocess -> pseudo key -> hashing function -> array storage
+				-eack key maps to unique ip in a Perfect hashing structure
+	-Can be very dense, or not (customize the hashing scheme).
+	-Most common structure.
+	
+
+	
