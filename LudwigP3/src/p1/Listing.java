@@ -31,8 +31,8 @@ public class Listing {
     {
         address = a;
     }
-    
-    public String getName() {
+
+    public String getKey() {
         return name;
     }
 }// end of class Listing
