@@ -222,9 +222,38 @@ Hashing:
 		-NEED preproccesing algorithm
 			-changes non-numeric key, k, into a numeric pseudo key, pk.
 				-key -> preprocess -> pseudo key -> hashing function -> array storage
-				-eack key maps to unique ip in a Perfect hashing structure
+				-each key maps to unique ip in a Perfect (direct) hashing structure
+					-as in, pseudokey = ip.
 	-Can be very dense, or not (customize the hashing scheme).
 	-Most common structure.
+	-ALWAYS O(1), even if not direct/perfect hashing.
+	-search length = how many times you look at the array
 	
+	-Loading factor (current) = nodes currently in array
+		(N = size of array)
+		-n / N 
+	-Max Loading factor = maximum nodes the structure will contain
+		-nMax / N
 
-	
+	-Space complexity: (n = nMax, N = size of array, 8 is two variables, 4 is bytes per node)
+		D = i / (i + o)
+		  = nw / (nw + N * 4 + 8)
+		  = 1 / ( 1 + (4N / nw) + (8 / nw))
+		  = 1 / (1 + (4/w))
+
+	NON-perfect/indirect hashing:
+		-collisions can occur are possible (UNLIKE perfect/direct hashing)
+			-collision algorithm required.
+			-different preprocessing and ip algorithm
+			-One element of the array for every key that will exist -> the array size N = ?
+			-Used to be much more dense, but still fast even if slower than direct.
+				-OPTIMUM: nMax / N = 0.75 <- Makes average search ~3 or ~4
+			To get Array size (N): 
+			-N = nMax / 0.75 (1)
+			-N SHOULD BE a prime number (2a)
+				-(e.g. if N was 27 (not prime), make N 29 (prime)).
+				-FURTHER STILL, it must be a "4k + 3" prime.(2b)
+					-so: N = 4k + 3 while k is an integer if N is a 4k + 3 prime.
+						-solve for k to determine if it is a 4k + 3 prime.
+							-if not, go one more prime until you get one.
+				-see pg260+261 for FOLDING algorithm

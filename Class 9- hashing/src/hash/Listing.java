@@ -15,7 +15,7 @@ public class Listing {
                 + "\nName is " + name + "\n");
     }
 
-    public Listing deepCopy() {
+    public Listing clone() {
         Listing clone = new Listing(number, name);
         return clone;
     }
