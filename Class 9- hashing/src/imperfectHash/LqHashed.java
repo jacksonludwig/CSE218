@@ -30,7 +30,7 @@ public class LqHashed {
             q = pk / N;
             offset = q;
             ip = pk % N;
-            if (q % N == 0) {
+            if (q % N == 0) { // fix for collision algorithm
                 offset = defaultQuotient;
             }
             while (pass < N) {
@@ -199,5 +199,22 @@ public class LqHashed {
             n = n + 1;
         }
         return Math.abs(pseudoKey);
+    }
+
+    // expand method for p3. In p3 this needs to be invoked by insert.
+    public boolean expand(int newSize) {
+        Listing[] temp = data;
+        data = new Listing[newSize];
+        if (data == null) {
+            data = temp;
+            return false;
+        }
+        N = newSize;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null && temp[i] != deleted) {
+                insert(temp[i]); // won't insert dummies (good thing) or nulls (already null)
+            }
+        }
+        return true;
     }
 }

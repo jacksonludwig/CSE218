@@ -256,4 +256,39 @@ Hashing:
 					-so: N = 4k + 3 while k is an integer if N is a 4k + 3 prime.
 						-solve for k to determine if it is a 4k + 3 prime.
 							-if not, go one more prime until you get one.
-				-see pg260+261 for FOLDING algorithm
+								-in summary: N = nMax/ 0.75 increased to the next 4k+3 prime	
+									-(reminder: pi product for ?)
+				-Preprocessing function: k1k2k3…
+					Folding: pk = k1->4 + k5->8 + k9->12 …
+				-Hashing function: ip = pk % N;
+			-see pg260+261 for FOLDING algorithm
+
+			-collision algorithms:
+				-One we will use
+					- ip = (ip + offset) % N;
+						- LINEAR QUOTIENT version (best)
+							-Offset = q = pk / N or a 4k+3 prime
+								-must check if q is 0 -- if it is, use 4k+3 prime.
+			
+			-Delete Problem (same for fetch, update):
+				-Use DUMMY node/variable (will keep searching until it finds null, hopping over dummy nodes).
+					-v1 = "no address was ever here" (null for our purposes: stop now).
+					-v2 = "once was a node here, but it was deleted" (dummy node/object for our purposes: keep going).
+
+			Density:
+				- D = i / (i + o)
+				    = nMaxw/(nMaxw + 4N + 8)
+				    = 1 / (1 + (4N / nMaxw) + (8 / nMaxw))
+				    = about 1 / (1 + (4 / w(.75)) [nMax = loading factor, which is always .75 for efficiency]
+
+			-Node not-in-the-structure problem:
+				-Occurs when searching for a node that isn't in the array (will search every single node -- BAD)
+					-Must not let too many dummies add up (.75 loading factor)
+						-LF = n / N
+						-LF[pseudo] = (n + n[V2]) / N
+							-if LF[pseudo] is over .75, fix. 
+								-can just use expand without a bigger size.
+				
+			-see slides for instructions on problem fixes, enhanced methods...
+
+
