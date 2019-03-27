@@ -1,12 +1,12 @@
 package p1;
 
-public class Listing {
+public class StudentListing {
 
     private String name;  // key field
     private String address;
     private String number;
 
-    public Listing(String n, String a, String num) {
+    public StudentListing(String n, String a, String num) {
         name = n;
         address = a;
         number = num;
@@ -18,8 +18,8 @@ public class Listing {
                 + "\nNumber is " + number + "\n");
     }
 
-    public Listing deepCopy() {
-        Listing clone = new Listing(name, address, number);
+    public StudentListing deepCopy() {
+        StudentListing clone = new StudentListing(name, address, number);
         return clone;
     }
 

@@ -10,20 +10,32 @@ public class SinglyLinkedList {
         h.next = null;
     }
 
-    public boolean insert(Listing newListing) {
-        Node n = new Node();
-        if (n == null) // out of memory
-        {
-            return false;
-        } else {
+    public boolean insert(StudentListing newListing) {
+        Node q = h;
+        Node p = h.next;
+        if (p == null) {
+            Node n = new Node();
+            n.l = newListing.deepCopy();
             n.next = h.next;
             h.next = n;
             n.l = newListing.deepCopy();
             return true;
         }
+        while (p != null && (p.l.compareTo(newListing.getKey()) < 0)) {
+            q = p;
+            p = p.next;
+        }
+        if (p != null) {
+            Node n = new Node();
+            n.l = newListing.deepCopy();
+            n.next = p;
+            q.next = n;
+            return true;
+        }
+        return false;
     }
 
-    public Listing fetch(String targetKey) {
+    public StudentListing fetch(String targetKey) {
         Node p = h.next;
         while (p != null && !(p.l.compareTo(targetKey) == 0)) {
             p = p.next;
@@ -42,7 +54,7 @@ public class SinglyLinkedList {
             q = p;
             p = p.next;
         }
-        if (p != null) {
+        if (p != null && !(p.l.compareTo(targetKey) == 0)) { // a hit
             q.next = p.next;
             return true;
         } else {
@@ -50,7 +62,7 @@ public class SinglyLinkedList {
         }
     }
 
-    public boolean update(String targetKey, Listing newListing) {
+    public boolean update(String targetKey, StudentListing newListing) {
         if (delete(targetKey) == false) {
             return false;
         } else if (insert(newListing) == false) {
@@ -70,7 +82,7 @@ public class SinglyLinkedList {
 
     public class Node {
 
-        private Listing l;
+        private StudentListing l;
         private Node next;
 
         public Node() {
