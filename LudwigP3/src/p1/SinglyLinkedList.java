@@ -13,9 +13,11 @@ public class SinglyLinkedList {
     public boolean insert(StudentListing newListing) {
         Node q = h;
         Node p = h.next;
-        if (p == null) {
-            Node n = new Node();
-            n.l = newListing.deepCopy();
+        Node n = new Node();
+        if (n == null) {
+            return false;
+        }
+        if (h.next == null) {
             n.next = h.next;
             h.next = n;
             n.l = newListing.deepCopy();
@@ -25,36 +27,40 @@ public class SinglyLinkedList {
             q = p;
             p = p.next;
         }
-        if (p != null) {
-            Node n = new Node();
-            n.l = newListing.deepCopy();
-            n.next = p;
-            q.next = n;
-            return true;
-        }
-        return false;
+        n.l = newListing.deepCopy();
+        n.next = p;
+        q.next = n;
+        return true;
     }
 
     public StudentListing fetch(String targetKey) {
+        Node q = h;
         Node p = h.next;
-        while (p != null && !(p.l.compareTo(targetKey) == 0)) {
+        if (p.l.compareTo(targetKey) == 0) {
+            return h.next.l;
+        }
+        while (p != null && (p.l.compareTo(targetKey) < 0)) {
+            q = p;
             p = p.next;
         }
-        if (p != null) {
+        if (p != null && (p.l.compareTo(targetKey) == 0)) { // a hit
             return p.l.deepCopy();
-        } else {
-            return null;
         }
+        return null;
     }
 
     public boolean delete(String targetKey) {
         Node q = h;
         Node p = h.next;
-        while (p != null && !(p.l.compareTo(targetKey) == 0)) {
+        if (p.l.compareTo(targetKey) == 0) {
+            h.next = p.next;
+            return true;
+        }
+        while (p != null && (p.l.compareTo(targetKey) < 0)) {
             q = p;
             p = p.next;
         }
-        if (p != null && !(p.l.compareTo(targetKey) == 0)) { // a hit
+        if (p != null && (p.l.compareTo(targetKey) == 0)) { // a hit
             q.next = p.next;
             return true;
         } else {
