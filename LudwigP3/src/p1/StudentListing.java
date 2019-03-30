@@ -1,5 +1,7 @@
 package p1;
 
+import javax.swing.JOptionPane;
+
 public class StudentListing {
 
     private String name;  // key field
@@ -10,6 +12,12 @@ public class StudentListing {
         name = n;
         address = a;
         number = num;
+    }
+    
+    public StudentListing() {
+        name = "";
+        address = "";
+        number = "";
     }
 
     public String toString() {
@@ -26,14 +34,15 @@ public class StudentListing {
     public int compareTo(String targetKey) {
         return (name.compareTo(targetKey));
     }
-
-    public void setAddress(String a) // coded to demonstrate encapsulation
-    {
-        address = a;
+    
+    public void inputStudent() {
+        name = JOptionPane.showInputDialog("Enter a name");
+        address = JOptionPane.showInputDialog("Enter an address");
+        number = JOptionPane.showInputDialog("Enter a number");
     }
 
     public String getKey() {
         return name;
     }
-}// end of class Listing
+}
 

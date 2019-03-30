@@ -1,13 +1,14 @@
 package p1;
 
-public class SinglyLinkedList {
+public class DoublyLinkedList {
 
     private Node h;  // list header
 
-    public SinglyLinkedList() {
+    public DoublyLinkedList() {
         h = new Node();  // dummy node
         h.l = null;
         h.next = null;
+        h.back = null;
     }
 
     public boolean insert(StudentListing newListing) {
@@ -18,17 +19,21 @@ public class SinglyLinkedList {
             return false;
         }
         if (h.next == null) {
+            n.l = newListing.deepCopy();
             n.next = h.next;
             h.next = n;
-            n.l = newListing.deepCopy();
             return true;
         }
         while (p != null && (p.l.compareTo(newListing.getKey()) < 0)) {
+            if (q != null) {
+                p.back = q;
+            }
             q = p;
             p = p.next;
         }
         n.l = newListing.deepCopy();
         n.next = p;
+        n.back = q;
         q.next = n;
         return true;
     }
@@ -61,7 +66,12 @@ public class SinglyLinkedList {
             p = p.next;
         }
         if (p != null && (p.l.compareTo(targetKey) == 0)) { // a hit
-            q.next = p.next;
+            if (p.next == null) {
+                q.next = p.next;
+            } else {
+                p.next.back = q;
+                q.next = p.next;
+            }
             return true;
         } else {
             return false;
@@ -86,13 +96,31 @@ public class SinglyLinkedList {
         }
     }
 
+    public void showAllBackward() {
+        Node p = h.next;
+        while (p != null) 
+        {
+            if (p.next == null) {
+                break;
+            }
+            p = p.next;
+        }
+        while (p != null) {
+            if (p.l != null) {
+                System.out.println(p.l);
+            }
+            p = p.back;
+        }
+    }
+
     public class Node {
 
         private StudentListing l;
         private Node next;
+        private Node back;
 
         public Node() {
         }
-    }// end of inner class Node
-}//end SinglyLinkedList outer class
+    }
+}
 
