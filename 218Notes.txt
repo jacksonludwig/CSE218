@@ -173,36 +173,7 @@ Linked Lists:
 			-one pointer chasing the other
 ***************
    Sorted methods:
-    public boolean insertSorted(Listing newListing) {
-        Node q = h;
-        Node p = h.next;
-        while (p != null && (p.l.compareTo(newListing.getKey()) < 0)) {
-            q = p;
-            p = p.next;
-        }
-        if (p != null) {
-            Node n = new Node();
-            n.l = newListing.clone();
-            n.next = p;
-            q.next = n;
-            return true;
-        }
-        return false;
-    }
-    public boolean deleteSorted(String targetKey) { // same for fetch
-        Node q = h;
-        Node p = h.next;
-        while (p != null && !(p.l.compareTo(targetKey) < 0)) {
-            q = p;
-            p = p.next;
-        }
-        if (p != null && !(p.l.compareTo(targetKey) == 0)) { // a hit
-            q.next = p.next;
-            return true;
-        } else {
-            return false;
-        }
-    }
+    see project 3
 **************
 
 	Doubly linked list:
@@ -242,7 +213,7 @@ Hashing:
 		  = 1 / (1 + (4/w))
 
 	NON-perfect/indirect hashing:
-		-collisions can occur are possible (UNLIKE perfect/direct hashing)
+		-collisions can occur; are possible (UNLIKE perfect/direct hashing)
 			-collision algorithm required.
 			-different preprocessing and ip algorithm
 			-One element of the array for every key that will exist -> the array size N = ?
