@@ -254,12 +254,22 @@ Hashing:
 
 			-Node not-in-the-structure problem:
 				-Occurs when searching for a node that isn't in the array (will search every single node -- BAD)
-					-Must not let too many dummies add up (.75 loading factor)
+					-Must not let too many dummies add up (.75 loading factor). Watch Pseudo Loading Factor to make sure it stays below .75, just like normal LF.
 						-LF = n / N
 						-LF[pseudo] = (n + n[V2]) / N
 							-if LF[pseudo] is over .75, fix. 
-								-can just use expand without a bigger size.
+								-can just use expand without a bigger size. Essentially copy array without dummies.
+								-keep a class variable, e.g. numDummies, tracking how many v2/dummy nodes are inserted (happens in delete) and deletes are overwritten (happens in insert).
 				
 			-see slides for instructions on problem fixes, enhanced methods...
 
 
+--------------------------
+
+Recursion:
+	-Slower, more memory hungary...
+	-But can solve a few select problems MUCH easier than it would be without.
+	-To understand recursion, factorial:
+		loop: n! = n * (n - 1) * (n - 2) .... * 1
+		recursion: n! = n * (n - 1) and 1! = 1
+	-Base Case, Reduced Problem, General Solution
