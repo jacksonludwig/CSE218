@@ -263,6 +263,12 @@ Hashing:
 				
 			-see slides for instructions on problem fixes, enhanced methods...
 
+	Hashing Formula summary:
+		Array storage size (PERFECT HASH): N = maxKey - minKey + 1.
+		Array storage size (IMPERFECT HASH): N = nMax / LoadingFactor [nMax is max number of nodes to be in array, LF is usually .75).
+		Loading Factor (ALWAYS): n / N [n is number currently in structure]
+		Density (ALWAYS): W / (W + (4 / LoadingFactor))
+		Average Search Length (IMPERFECT HASH ONLY): 1 / (1 - LoadingFactor)
 
 --------------------------
 
