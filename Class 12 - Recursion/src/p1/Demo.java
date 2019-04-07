@@ -84,25 +84,25 @@ public class Demo {
     }
 
     // fibo dynamic 
-    public static int fiboDynamic(int n) {
-        count++;
-        System.out.println("Recursion invoked " + count + " times.");
-        // if it's the base case, return known result
-        if (n == 1 || n == 2) {
-            return 1;
-        }
-        // calculate the reduced problem(s) recursively (rp)
-        int rp1 = fibonacci(n - 1);
-        int rp2 = fibonacci(n - 2);
-        // dynamic part
-        if (values[n - 1] != 0) {
-            rp1 = values[n - 1];
-        } else {
-            rp1 = fib(n - 1);
-            values[n - 1] = rp1;
-        } // end dynamic
-        // use rp to calculate the solution
-        int gs = rp1 + rp2;
-        return gs;
-    }
+//    public static int fiboDynamic(int n) {
+//        count++;
+//        System.out.println("Recursion invoked " + count + " times.");
+//        // if it's the base case, return known result
+//        if (n == 1 || n == 2) {
+//            return 1;
+//        }
+//        // calculate the reduced problem(s) recursively (rp)
+//        int rp1 = fibonacci(n - 1);
+//        int rp2 = fibonacci(n - 2);
+//        // dynamic part
+//        if (values[n - 1] != 0) {
+//            rp1 = values[n - 1];
+//        } else {
+//            rp1 = fib(n - 1);
+//            values[n - 1] = rp1;
+//        } // end dynamic
+//        // use rp to calculate the solution
+//        int gs = rp1 + rp2;
+//        return gs;
+//    }
 }

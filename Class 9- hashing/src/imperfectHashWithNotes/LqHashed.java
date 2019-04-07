@@ -1,4 +1,15 @@
-package imperfectHash;
+/*
+expand must be implemented to insert if loading factor exceeds .75. (1)
+calculate PLF after insert, using: PLF = (n + nd) /((double) N) to get PLF and "expanding" if it is greater than .75. (2)
+number of dummies must be tracked and increased in deletes, decreased in inserts that overwrite dummies. (2)
+Add Output method. Two additional lines of output. Will need to cast. 
+    Output Average Search length -> [number of array accesses / number of operations performed]. Two more class variables needed.
+                   increment op performed for every fetch, delete, insert. 
+                   increment array accesesses every time a search loop occurs. 
+    Current loading factor (easy), Pseudo Loading Factor (easy), 
+    Current Density -> [1 / (1 + 4 / (w * LF)] (3)
+*/
+package imperfectHashWithNotes;
 
 public class LqHashed {
 
@@ -212,7 +223,7 @@ public class LqHashed {
         N = newSize;
         for (int i = 0; i < temp.length; i++) {
             if (temp[i] != null && temp[i] != deleted) { // won't insert dummies (good thing) or nulls (already null)
-                insert(temp[i]);
+                insert(temp[i]); 
             }
         }
         return true;

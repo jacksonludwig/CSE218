@@ -1,4 +1,4 @@
-package p1;
+package imperfectHashWithNotes;
 
 public class Listing {
 

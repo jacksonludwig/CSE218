@@ -1,72 +1,73 @@
-/*
-expand must be implemented to insert if loading factor exceeds .75. (1)
-calculate PLF after insert, using: PLF = (n + nd) /((double) N) to get PLF and "expanding" if it is greater than .75. (2)
-number of dummies must be tracked and increased in deletes, decreased in inserts that overwrite dummies. (2)
-Add Output method. Two additional lines of output. Will need to cast. 
-    Output Average Search length -> [number of array accesses / number of operations performed]. Two more class variables needed.
-                   increment op performed for every fetch, delete, insert. 
-                   increment array accesesses every time a search loop occurs. 
-    Current loading factor (easy), Pseudo Loading Factor (easy), 
-    Current Density -> [1 / (1 + 4 / (w * LF)] (3)
-*/
 package p1;
 
 public class LqHashed {
 
-    int N;
-    int n = 0;			// the number of nodes in the structure
-    int defaultQuotient = 9967;  	// the default 4k+3 prime
-    double loadingFactor = 0.75;
-    Listing deleted;		// the dummy node, v2
-    private Listing[] data; 	// the primary storage array
+    private int N;
+    private int n = 0;			// the number of nodes in the structure
+    private int nodeWidth = 0;
+    private int defaultQuotient = 9967;  	// the default 4k+3 prime
+    private static final double loadingFactor = 0.75;
+    private StudentListing deleted;		// the dummy node, v2
+    private StudentListing[] data; 	// the primary storage array
+    private double pLoadingFactor = 0;
+    private int nDummies = 0;
+    private int nAccesses = 0;
+    private int nOperations = 0;
 
-    public LqHashed(int length) {
+    public LqHashed(int length, int nodeWidth) {
         int pct = (int) ((1.0 / loadingFactor - 1) * 100.0);
         N = fourKPlus3(length, pct);
-        data = new Listing[N];
-        deleted = new Listing("", "", "");
-        for (int i = 0; i < N; i++) {
-            data[i] = null; // not necessary in java, but in c++ everything needs to be manually set to null
-        }
-    }// end of constructor
+        data = new StudentListing[N];
+        deleted = new StudentListing("", "", "");
+        this.nodeWidth = nodeWidth;
+    }
 
-    public boolean insert(Listing newListing) {
-        boolean noError;
+    public boolean insert(StudentListing newStudentListing) {
         boolean hit = false;
         int pass, q, offset, ip;
-        int pk = stringToInt(newListing.getKey());  // preprocess the key
-        if ((((double) n) / N) < loadingFactor)// insert the node. If expand is used, it would be: expand if >=.
-        {                                      // expand size would be: if(success == true) { expand(fourKPlus3(2 * N, 33)); }
-            pass = 0;                          // some lines can be removed once this is implemented
-            q = pk / N;
-            offset = q;
-            ip = pk % N;
-            if (q % N == 0) { // fix for collision algorithm
-                offset = defaultQuotient;
+        int pk = stringToInt(newStudentListing.getKey());  // preprocess the key
+        if (pLoadingFactor >= loadingFactor) {
+            if (!expand(N)) {
+                return false;
             }
-            while (pass < N) {
-                if (data[ip] == null || data[ip] == deleted) {
-                    hit = true;
-                    break;
-                }
-                ip = (ip + offset) % N;
-                pass = pass + 1;
-            }
-            if (hit == true) // insert the node
-            {
-                data[ip] = newListing.deepCopy();
-                n++;
-                return noError = true;
-            } else {
-                return noError = false;
-            }
-        } else //structure full to loading factor
-        {
-            return noError = false;
         }
-    }// end for the Insert method
+        if ((((double) n) / N) >= loadingFactor) {
+            if (!expand(fourKPlus3(2 * N, 33))) {
+                return false;
+            }
+        }
+        pass = 0;
+        q = pk / N;
+        offset = q;
+        ip = pk % N;
+        if (q % N == 0) { // fix for collision algorithm
+            offset = defaultQuotient;
+        }
+        while (pass < N) {
+            nAccesses++;
+            if (data[ip] == null || data[ip] == deleted) {
+                hit = true;
+                break;
+            }
+            ip = (ip + offset) % N;
+            pass = pass + 1;
+        }
+        if (hit == true) // insert the node
+        {
+            if (data[ip] == deleted) {
+                nDummies--;
+            }
+            data[ip] = newStudentListing.deepCopy();
+            n++;
+            pLoadingFactor = (n + nDummies) / ((double) N); // PLF = (n + nd) /((double) N)
+            nOperations++;
+            outputInfo();
+            return true;
+        }
+        return false;
+    }
 
-    public Listing fetch(String targetKey) {
+    public StudentListing fetch(String targetKey) {
         boolean noError;
         boolean hit = false;
         int pass, q, offset, ip;
@@ -79,6 +80,7 @@ public class LqHashed {
             offset = defaultQuotient;
         }
         while (pass < N) {
+            nAccesses++;
             if (data[ip] == null) //node not in structure
             {
                 break;
@@ -93,11 +95,13 @@ public class LqHashed {
         }
         if (hit == true) //return a deep copy of the node
         {
+            nOperations++;
+            outputInfo();
             return data[ip].deepCopy();
         } else {
             return null;
         }
-    }//end of the Fetch method
+    }
 
     public boolean delete(String targetKey) {
         boolean noError;
@@ -112,6 +116,7 @@ public class LqHashed {
             offset = defaultQuotient;
         }
         while (pass < N) {
+            nAccesses++;
             if (data[ip] == null) //node not in structure
             {
                 break;
@@ -126,27 +131,30 @@ public class LqHashed {
         }
         if (hit == true) //delete the node
         {
+            nOperations++;
             data[ip] = deleted;
+            nDummies++;
             n--;
+            outputInfo();
             return noError = true;
         } else {
             return noError = false;
         }
-    }//end of the Delete method
+    }
 
-    public boolean update(String targetKey, Listing newListing) {
+    public boolean update(String targetKey, StudentListing newStudentListing) {
         if (delete(targetKey) == false) {
             return false;
-        } else if (insert(newListing) == false) {
+        } else if (insert(newStudentListing) == false) {
             return false;
         }
         return true;
-    }//end of the Update method
+    }
 
     public void showAll() {
         for (int i = 0; i < N; i++) {
             if (data[i] != null && data[i] != deleted) {
-                data[i].toString();
+                System.out.println(data[i].toString());
             }
         }
     }
@@ -212,20 +220,37 @@ public class LqHashed {
         return Math.abs(pseudoKey);
     }
 
-    // expand method for p4. In p4 this needs to be invoked by insert.
     private boolean expand(int newSize) { // size needs to be set because it is used to fix node not in structure problem
-        Listing[] temp = data;
-        data = new Listing[newSize];
+        StudentListing[] temp = data;
+        data = new StudentListing[newSize];
         if (data == null) {
             data = temp;
             return false;
         }
+
+        int nOld = N;
         N = newSize;
+
         for (int i = 0; i < temp.length; i++) {
-            if (temp[i] != null && temp[i] != deleted) { // won't insert dummies (good thing) or nulls (already null)
-                insert(temp[i]); 
+            if (temp[i] != null && temp[i] != deleted) { // won't insert dummies or nulls
+                insert(temp[i]);
             }
         }
+
+        nDummies = 0;
+        if (newSize == nOld) {
+            System.out.println("The dummy nodes were eliminated; The new pseudo loading factor is: " + (String.format("%.2f", (((double) n) / N))));
+        } else {
+            System.out.println("Primary storage area was expanded. The array size is now: " + N);
+        }
         return true;
+    }
+
+    private void outputInfo() {
+        System.out.println("Search Length: " + String.format("%.2f", nAccesses / (double) nOperations));
+        System.out.println("Current Loading Factor: " + String.format("%.2f", (((double) n) / N)));
+        System.out.println("Current Pseudo Loading Factor: " + String.format("%.2f", (n + nDummies) / ((double) N)));
+        System.out.println("Current Density: " + String.format("%.2f", 1 / (1 + 4 / (nodeWidth * ((double) n) / N))));
+        System.out.println();
     }
 }

@@ -1,20 +1,20 @@
-package imperfectHash;
+package p1;
 
 import javax.swing.JOptionPane;
 
-public class Listing {
+public class StudentListing {
 
     private String name;  // key field
     private String address;
     private String number;
 
-    public Listing(String n, String a, String num) {
+    public StudentListing(String n, String a, String num) {
         name = n;
         address = a;
         number = num;
     }
     
-    public Listing() {
+    public StudentListing() {
         name = "";
         address = "";
         number = "";
@@ -26,28 +26,23 @@ public class Listing {
                 + "\nNumber is " + number + "\n");
     }
 
-    public Listing deepCopy() {
-        Listing clone = new Listing(name, address, number);
+    public StudentListing deepCopy() {
+        StudentListing clone = new StudentListing(name, address, number);
         return clone;
     }
 
     public int compareTo(String targetKey) {
         return (name.compareTo(targetKey));
     }
-
-    public void setAddress(String a) // coded to demonstrate encapsulation
-    {
-        address = a;
-    }
-
-    public String getKey() {
-        return name;
-    }
-
+    
     public void inputStudent() {
         name = JOptionPane.showInputDialog("Enter a name");
         address = JOptionPane.showInputDialog("Enter an address");
         number = JOptionPane.showInputDialog("Enter a number");
     }
-}// end of class Listing
+
+    public String getKey() {
+        return name;
+    }
+}
 
