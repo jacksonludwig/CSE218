@@ -279,3 +279,18 @@ Recursion:
 		loop: n! = n * (n - 1) * (n - 2) .... * 1
 		recursion: n! = n * (n - 1) and 1! = 1
 	-Base Case, Reduced Problem, General Solution
+--------------------------
+Binary Trees:
+	-access mode: by field.
+	-speed complexity: o(log[base2]n) e.g. 1 million is only 20 looks.
+	-dynamic/noncontiguous: yes
+	-space complexity: same as doubly linked list.
+
+	-directed trees only go one direction (downward).	
+	-always one root node. Others extend from it and are called leaves.
+		-All nodes are parents, and all CAN have children. Since there can be more than one child, children can have siblings.
+
+	-Binary trees can only have ZERO, ONE, OR TWO children (left and right child). Non binary structures can have more than two.
+		-A binary tree is balanced if all levels are full except the lowest level.
+			-a left balanced binary tree is a balanced binary tree IN ADDITION TO having the lowest level be filled from left to right.
+			-a complete tree is a binary tree with all full levels (would also be balanced, left balanced, etc.)

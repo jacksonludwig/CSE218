@@ -26,7 +26,7 @@ public class LqHashed {
         boolean hit = false;
         int pass, q, offset, ip;
         int pk = stringToInt(newStudentListing.getKey());  // preprocess the key
-        if (pLoadingFactor >= loadingFactor) {
+        if (((n + nDummies) / ((double) N)) >= loadingFactor) {
             if (!expand(N)) {
                 return false;
             }
@@ -59,7 +59,7 @@ public class LqHashed {
             }
             data[ip] = newStudentListing.deepCopy();
             n++;
-            pLoadingFactor = (n + nDummies) / ((double) N); // PLF = (n + nd) /((double) N)
+           // pLoadingFactor = (n + nDummies) / ((double) N); // PLF = (n + nd) /((double) N)
             nOperations++;
             outputInfo();
             return true;
@@ -135,6 +135,7 @@ public class LqHashed {
             data[ip] = deleted;
             nDummies++;
             n--;
+          //  pLoadingFactor = (n + nDummies) / ((double) N);
             outputInfo();
             return noError = true;
         } else {
@@ -239,7 +240,7 @@ public class LqHashed {
 
         nDummies = 0;
         if (newSize == nOld) {
-            System.out.println("The dummy nodes were eliminated; The new pseudo loading factor is: " + (String.format("%.2f", (((double) n) / N))));
+            System.out.println("The dummy nodes were eliminated; The new pseudo loading factor (before the next insert) is: " + (String.format("%.2f", (n + nDummies) / ((double) N))));
         } else {
             System.out.println("Primary storage area was expanded. The array size is now: " + N);
         }
