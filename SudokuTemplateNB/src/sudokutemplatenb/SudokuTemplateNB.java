@@ -1,9 +1,5 @@
-// incorrect -- download correct ver **************
-// ******************************************************************88
-
 package sudokutemplatenb;
 
-// import javax.swing.JOptionPane;
 public class SudokuTemplateNB {
 
     static int nCols = 9; // number of columns
@@ -14,7 +10,7 @@ public class SudokuTemplateNB {
         boolean success = false;
         intialize();
         outputBoard();
-        success = makeNextValidMove(5, 5);
+        success = makeNextValidMove(0, 0);
 
         if (success == true) {
             outputBoard();
@@ -50,9 +46,9 @@ public class SudokuTemplateNB {
                     return true;
                 } else {
                     if (col != 8) {
-                        atGoal = makeNextValidMove(row, col+1); // check
+                        atGoal = makeNextValidMove(row, col + 1);
                     } else {
-                        atGoal = makeNextValidMove(row+1, 0); // check
+                        atGoal = makeNextValidMove(row + 1, 0);
                     }
 
                     if (atGoal == false)// backtrack
@@ -75,8 +71,9 @@ public class SudokuTemplateNB {
     public static boolean goalReached(int row, int col) {
         if (row == 8 && col == 8) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public static void record(int row, int col, int choice) {
@@ -87,24 +84,27 @@ public class SudokuTemplateNB {
         board[row][col] = 0;
     }
 
-    public static boolean isValid(int row, int col, int choice) { // check row
-        for (int c = 0; c < 9; c++) {
+    public static boolean isValid(int row, int col, int choice) {
+        for (int c = 0; c <= 8; c++) // check row
+        {
             if (board[row][c] == choice) {
                 return false;
             }
         }
-        for (int r = 0; r < 9; r++) {
-            if (board[col][r] == choice) { // check col
+        for (int r = 0; r <= 8; r++) // check col
+        {
+            if (board[r][col] == choice) {
                 return false;
             }
         }
-//        int r = (row / 3) * 3;
-//        int c = (col / 3) * 3;
-        for (int r = row / 3 * 3; r <= row / 3 * 3 + 2; r++) {
-            for (int c = col / 3 * 3; c <= col / 3 * 3 + 2; c++) {
+        //int r = (row/3)*3;
+        //int c = (col/3)*3;
+        for (int r = (row / 3) * 3; r <= (row / 3) * 3 + 2; r++) {
+            for (int c = (col / 3) * 3; c <= (col / 3) * 3 + 2; c++) {
                 if (board[r][c] == choice) {
                     return false;
                 }
+
             }
         }
         return true;

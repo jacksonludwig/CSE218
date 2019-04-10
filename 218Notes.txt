@@ -267,6 +267,8 @@ Hashing:
 		Array storage size (PERFECT HASH): N = maxKey - minKey + 1.
 		Array storage size (IMPERFECT HASH): N = nMax / LoadingFactor [nMax is max number of nodes to be in array, LF is usually .75).
 		Loading Factor (ALWAYS): n / N [n is number currently in structure]
+		N (PERFECT) = MaxKey-MinKey + 1
+		N (IMPERFECT) = 4k+3 prime at or next greater than: nMax / LF.
 		Density (ALWAYS): W / (W + (4 / LoadingFactor))
 		Average Search Length (IMPERFECT HASH ONLY): 1 / (1 - LoadingFactor)
 
@@ -280,7 +282,7 @@ Recursion:
 		recursion: n! = n * (n - 1) and 1! = 1
 	-Base Case, Reduced Problem, General Solution
 --------------------------
-Binary Trees:
+Trees:
 	-access mode: by field.
 	-speed complexity: o(log[base2]n) e.g. 1 million is only 20 looks.
 	-dynamic/noncontiguous: yes
@@ -290,7 +292,32 @@ Binary Trees:
 	-always one root node. Others extend from it and are called leaves.
 		-All nodes are parents, and all CAN have children. Since there can be more than one child, children can have siblings.
 
+	<---Below is for binary trees (what we're using mostly)--->
 	-Binary trees can only have ZERO, ONE, OR TWO children (left and right child). Non binary structures can have more than two.
 		-A binary tree is balanced if all levels are full except the lowest level.
 			-a left balanced binary tree is a balanced binary tree IN ADDITION TO having the lowest level be filled from left to right.
 			-a complete tree is a binary tree with all full levels (would also be balanced, left balanced, etc.)
+	-Out degree of node = number of children.
+	-Out degree of entire tree = number of highest out degree
+	-leaves are nodes without children
+
+	Math:
+		-Maximum number of Nodes at level ln = n = f(n) = 2^ln   [ln = level number, e.g. 0, 1, 2, etc.]
+			-So, 2^ln = number of nodes that could be at level ln.
+		-Maximum number of nodes in a tree with l levels = nMax = g(l) = 2^(l) - 1
+			-So, 2^(l) - 1 = number of nodes on a tree with nMax levels.
+		-Minimum number of levels needed to store nMax nodes = l = h(nMax) = log[base 2](nMax + 1)
+			-So, log[base 2](nMax + 1) = number of levels needed to store nMax nodes.
+
+	-Binary Search Trees:
+		-Every node's left child is less than it, and every right child is greater than it.
+			-allows nlog[base 2]n searches
+		-Must be balanced (reminder: balanced trees have every level full except the last) in order to keep nlog[base 2]n status.
+		-findNodes(targetKey, p, c) to find node. If c == null, the node wasn't in the structure.
+		
+		-every node of a binary search tree will have a Node variables keeping track of their left and right children.	
+			-Every TreeNode has: LeftChild | Address of clone | RightChild
+			-(TreeNode is java default class, just like Node for linked list)	
+		-use wrapper class for findNodes() to keep changes.(inner class).
+
+
