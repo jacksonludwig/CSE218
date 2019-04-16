@@ -264,11 +264,11 @@ Hashing:
 			-see slides for instructions on problem fixes, enhanced methods...
 
 	Hashing Formula summary:
-		Array storage size (PERFECT HASH): N = maxKey - minKey + 1.
-		Array storage size (IMPERFECT HASH): N = nMax / LoadingFactor [nMax is max number of nodes to be in array, LF is usually .75).
+		Array storage size (PERFECT HASH): N 
+		Array storage size (IMPERFECT HASH): N  
 		Loading Factor (ALWAYS): n / N [n is number currently in structure]
 		N (PERFECT) = MaxKey-MinKey + 1
-		N (IMPERFECT) = 4k+3 prime at or next greater than: nMax / LF.
+		N (IMPERFECT) = 4k+3 prime at or next greater than: nMax / LF. [nMax is max number of nodes to be in array, LF is usually .75).
 		Density (ALWAYS): W / (W + (4 / LoadingFactor))
 		Average Search Length (IMPERFECT HASH ONLY): 1 / (1 - LoadingFactor)
 
@@ -320,4 +320,30 @@ Trees:
 			-(TreeNode is java default class, just like Node for linked list)	
 		-use wrapper class for findNodes() to keep changes.(inner class).
 
-
+		-Density:
+			For n Nodes each w Wide:
+				-D = i / (i + o)
+				-D = (nw) / ( (nw) + (12n) + (4) )
+				-D = 1 / ( 1 + (12/w) )
+				[12 comes from the 4bytes in each node triplet; lc, node, rc]
+		-Traversing:
+			-complicated, because binary trees are not linear.
+			-BFT -- Breath First Traversals (traverse all nodes at each level of a tree at a time, working down each level).
+			-DFT -- Depth First Traversals (go down each node and back up) * ALWAYS used for binary search trees.
+				-example of DFT:
+					-Visit root, then left, then right; coded recursively. This is called an NLR output traversal.
+					-LNR: makes it sorted because output is done left tree->root->right tree recursively for the entire tree.
+		-Balancing Algorithms:
+			-Randomize nodes on insert (not recommended)
+			-Change insert and delete algorithms
+				-AVL (historically first) 
+				-Red-Black (in API). Have 5 necessary conditions.
+			-Change to Multiway (non binary) tree. Would change insert, fetch, and delete.
+				-"B trees"."2-3", "2-3-4"... are others	
+					-Rectangles/squares used in high level graphics
+					-Can have more than one key in a node.
+						-allows three ways out instead of two like in binary trees
+							-can be 4 or 5, etc. with more keys.
+					-5 conditions
+						-keys sorted low-> high, subtrees are correct (follow key interval guidelines), all leaves 
+						 on same levels, new nodes inserted in leaves, non leaf nodes must have one more child than it has keys.
