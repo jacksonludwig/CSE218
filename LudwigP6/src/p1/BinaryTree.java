@@ -1,7 +1,6 @@
 package p1;
 
 // For p6: need RNL and third mentioned showAll methods.
-
 public class BinaryTree {
 
     TreeNode root;
@@ -163,17 +162,46 @@ public class BinaryTree {
         return false;
     } // end of findNode
 
-    public void showAllLNR() { // left tree, root, right tree order
+    public void showAllDescending() { // left tree, root, right tree order
         LNR(root);
     }
 
-    private void LNR(TreeNode root) { 
+    private void LNR(TreeNode root) {
         if (root == null) {
             return;
         }
+        
         LNR(root.lc);
         System.out.println(root.node);
         LNR(root.rc);
+    }
+
+    public void showAllAscending() {
+        RNL(root);
+    }
+
+    private void RNL(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        
+        RNL(root.rc);
+        System.out.println(root.node);
+        RNL(root.lc);
+    }
+
+    public void showAllNRL() {
+        NRL(root);
+    }
+
+    private void NRL(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        
+        System.out.println(root.node);
+        NRL(root.rc);
+        NRL(root.lc);
     }
 
     public class TreeNodeWrapper {
