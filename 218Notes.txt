@@ -347,3 +347,31 @@ Trees:
 					-5 conditions
 						-keys sorted low-> high, subtrees are correct (follow key interval guidelines), all leaves 
 						 on same levels, new nodes inserted in leaves, non leaf nodes must have one more child than it has keys.
+
+--------------------------------------
+Sorting:
+
+	-Order data based on a key field, primitive value, etc.
+	-Sorting an array of primitives or strings?
+	-Sorting array based structures?
+
+	-Performance:
+		-Space complexity range: 4 bytes <= space complexity <= 4n bytes
+		-Speed complexity: 
+			-comes from (1) time to compare items (number of comparisons [called sort effort]), 
+			and (2) time to perform swaps.
+			- (1) is >= nlog[base2]n
+			- time for (2) must be added to (1), so sorting can be fairly intensive on arrays.
+	-Arrays and binary trees related, specifically, a left balanced one.
+		-i(lc) = f(n) = 2n + 1, n = "parent's" index | index of "left child"
+		-i(rc) = f(n) = 2n + 2, n = "parent's" index | index of "right child"
+	-What is a Heap?:
+		-Binary tree such that every node is larger than both of its children.
+			-Therefore:
+				-root is the largest node in the tree.
+				-every subtree is also a heap.
+		-ReHeap Down Algorithm
+			-makes the "tree" a heap
+			
+
+			
