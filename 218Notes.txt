@@ -372,6 +372,7 @@ Sorting:
 				-every subtree is also a heap.
 		-ReHeap Down Algorithm
 			-makes the "tree" a heap
+		-size / 2 - 1 [integer arithmetic] -> finds index of lowest level, right most parent.
 			
 
 			
