@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
     SEPARATE "and" conditions (others ?) so that the number of accesses is 
         accurate (short circuit evaluation will make it wrong sometimes)
+        can take out old output because we want a lot of values (10k+)
 
 */
 

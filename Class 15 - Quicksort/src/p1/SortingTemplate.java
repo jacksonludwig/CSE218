@@ -16,18 +16,18 @@ public class SortingTemplate {
         System.out.println(Arrays.toString(data));
         System.out.println("*********************");
 
-       // System.out.println(partition(data, 0, data.length - 1));
+        // System.out.println(partition(data, 0, data.length - 1));
         quickSort(data, 0, data.length - 1);
-        
+
         System.out.println("****** Sorted ******");
         System.out.println(Arrays.toString(data));
         System.out.println();
     }
 
     public static void quickSort(int[] data, int left, int right) {
-        if(left < right) {
-            int q = partition(data, left, right);
-            quickSort(data, left, q - 1); // sorts left side
+        if (left < right) {
+            int q = randomizedPartition(data, left, right); // index of where we placed the number in its final resting spot. outlier fix as well.
+            quickSort(data, left, q - 1); // sorts left side, q is something in its final place
             quickSort(data, q + 1, right); // sorts right side
         }
     }
@@ -35,16 +35,24 @@ public class SortingTemplate {
     public static int partition(int[] data, int left, int right) {
         int x = data[right];
         int i = left - 1;
-        
+
         for (int j = left; j <= right - 1; j++) {
             if (data[j] <= x) {
                 i++;
                 swap(data, i, j);
             }
         }
-        
+
         swap(data, i + 1, right);
         return i + 1;
+    }
+
+    private static int randomizedPartition(int[] data, int left, int right) { // fix for outlier where array is already sorted
+        Random random = new Random();
+        int randomIndex = random.nextInt(right - left) + left;
+        swap(data, randomIndex, right);
+        int q = partition(data, left, right);
+        return q;
     }
 
     public static void randomValues(int[] data) // random numbers from 0 to 999, no duplicates

@@ -9,6 +9,10 @@ int compareTo([object]) { } // from interface
 	0				a equals b
 	negative			a < b
 	positive			a > b
+
+Math class only has log() (ln or log base e) and log10() (log base 10)
+	-use change of base formula
+		-log[base b](n) = log(n) / log(b)
 ----------
 
 
@@ -373,6 +377,23 @@ Sorting:
 		-ReHeap Down Algorithm
 			-makes the "tree" a heap
 		-size / 2 - 1 [integer arithmetic] -> finds index of lowest level, right most parent.
-			
 
-			
+	-Quicksort is a good candidate for multithreading
+
+	-bubble sort
+		-n-1 passes
+		-n + n-1 + n-2 + n-... = (n * (n + 1)) / 2
+			-n^2 passes/algorithm
+			-generally not good and should not be used, but if there is many situations where data is already sorted, it is very fast.
+				-if no swaps, break out of algorithm
+
+	-merge sort
+		-good candidate for multithreading
+		-assumption that two subarrays are already sorted, so:
+			-starts with many sub arrays with 1 item each
+				-continually combines (merges) until there is a single, fully sorted array
+
+	-insertion sort
+		-assumption that everything is sorted but last value
+			-so, start on the second value (start with one thing to the left so it's "sorted")
+			-compare to every element behind as you move to a new index
