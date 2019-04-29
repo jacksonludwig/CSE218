@@ -37,7 +37,7 @@ public class HeapSortTemplate {
         double predictedSortEffort = 3 * data.length * (Math.log10(data.length) / Math.log10(2));
         
         JOptionPane.showMessageDialog(null, "Actual swaps = " + numSwaps + "; Predicted swaps = "
-                + String.format("%.2f", (2.0 / 3 * predictedSortEffort)) + "\nActual Sort effort = " 
+                + String.format("%.2f", ((2.0 / 3) * predictedSortEffort)) + "\nActual Sort effort = " 
                 + numComparisons + "; Predicted Sort effort = "
                 + String.format("%.2f", predictedSortEffort) + "; Min sort effort = " 
                 + String.format("%.2f", data.length * (Math.log10(data.length) / Math.log10(2))));

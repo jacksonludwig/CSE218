@@ -378,7 +378,9 @@ Sorting:
 			-makes the "tree" a heap
 		-size / 2 - 1 [integer arithmetic] -> finds index of lowest level, right most parent.
 
-	-Quicksort is a good candidate for multithreading
+	-Quicksort
+		-is a good candidate for multithreading
+		-outlier fixed in example
 
 	-bubble sort
 		-n-1 passes
@@ -397,3 +399,37 @@ Sorting:
 		-assumption that everything is sorted but last value
 			-so, start on the second value (start with one thing to the left so it's "sorted")
 			-compare to every element behind as you move to a new index
+	
+	-selection sort
+
+	-Stability of a sorting algorithm:
+		-items with the same value in the input array stay at the same index relative to each other, e.g.:
+			-/3, 4, 5, \3, 4, 8, |3 -> /3, \3, |3...
+
+	-O(n) sorting algorithms (typical fastest is nlog[base 2]n):
+		-Counting
+			-n items to be sorted (positive integers)
+			-maximum value of items (k) is known
+				-k <= O(n) < O(nlog[base 2]n)
+					-e.g. k can be 4000 if there are 1000 items in range, but not 1000000
+			
+		-Radix
+			-number of digits (d) & choices for digits < O(n)
+			-sorts digit by digit
+		-Bucket
+			-n items are 
+				-in the range 0 <= A[i] < 1
+				-randomly distributed over that interval
+				-uses insertion sort (ususally n^2) to sort "buckets" of pre-sorted linked lists in arrays
+-----------
+Graphs:
+	-Superset of trees
+	-graph equivalent term of trees:
+		-node -> vertex
+		-"one way arrow" -> edge (can be one way OR two way [default])
+	-edges can connect any two nodes in a graph ***
+	-edges can be bidirectional/undirected in a graph ***
+	-edges can store information *** (called edge weighting)
+		-stored in square 2-d adjacency matrix (2d array)
+	-vertexes don't need to be adjacent to any others ***
+	
