@@ -422,7 +422,7 @@ Sorting:
 				-randomly distributed over that interval
 				-uses insertion sort (ususally n^2) to sort "buckets" of pre-sorted linked lists in arrays
 -----------
-Graphs:
+Graphs (not on final):
 	-Superset of trees
 	-graph equivalent term of trees:
 		-node -> vertex
