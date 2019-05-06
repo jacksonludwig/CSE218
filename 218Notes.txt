@@ -422,7 +422,7 @@ Sorting:
 				-randomly distributed over that interval
 				-uses insertion sort (ususally n^2) to sort "buckets" of pre-sorted linked lists in arrays
 -----------
-Graphs (not on final):
+Graphs and misc (not on final):
 	-Superset of trees
 	-graph equivalent term of trees:
 		-node -> vertex
@@ -431,5 +431,30 @@ Graphs (not on final):
 	-edges can be bidirectional/undirected in a graph ***
 	-edges can store information *** (called edge weighting)
 		-stored in square 2-d adjacency matrix (2d array)
-	-vertexes don't need to be adjacent to any others ***
+	-vertices don't need to be adjacent to any others ***
+
+	-graphs are considered "Connected" when every vertex can be reached from every other vertex (IGNORING edge direction)
+	-graphs are "Strongly Connected" when every vertex can be reached from every other vertex (NOT ignoring direction)
+	-graphs not in these caregories are then "disjointed" (e.g. vertex is outside of a group of connected vertices)
+
+	-Floyd's Algorithm: (also called "All-Pairs" algorithm)
+		-Determines minimum path lengths between all vertices and all others.
+		-doesn't "tell you" how to get there
+		-simple code, n^3
+
+	-Dijkstra's Algorithm (aka GPS algorithm): 
+		-also determines shortest path, but between ONE vertex and all others.
+		-"tells you" how to get there
+		-more complex code, n^3
+		-generates two matrices
+			-column matrix with shortest paths
+			-adjacency matrix with edges that make shortest paths
+
+	-Primm's Algorithm
+		-Generates a MST (Minimum Spanning Tree)
+			-"tree" representation of graph where the smallest amount of distance to get to each vertex is determined.
+			-greedy algorithm
+			-Priority Queue:
+				-Queue Structure where those with higher priorities are out first.
+				-Coded using a heap
 	
