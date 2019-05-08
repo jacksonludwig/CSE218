@@ -276,6 +276,17 @@ Hashing:
 		Density (ALWAYS): W / (W + (4 / LoadingFactor))
 		Average Search Length (IMPERFECT HASH ONLY): 1 / (1 - LoadingFactor)
 
+		Getting home address:
+			-Perfect: ip = pk;
+			-Nonperfect: ip = pk % N;
+		Collision?:
+			-Perfect: can't happen
+			-Nonperfect: ip = (ip + offset) % N [if there is more than one collision, keep using the "new" ip that you've reached]
+				-offset:
+					-1
+					-p^2
+					-pk / N --> if this % N is 0, use next 4k+3 prime as offset.
+
 --------------------------
 
 Recursion:
@@ -283,7 +294,7 @@ Recursion:
 	-But can solve a few select problems MUCH easier than it would be without.
 	-To understand recursion, factorial:
 		loop: n! = n * (n - 1) * (n - 2) .... * 1
-		recursion: n! = n * (n - 1) and 1! = 1
+		recursion: n! = n * (n - 1)! and 1! = 1
 	-Base Case, Reduced Problem, General Solution
 --------------------------
 Trees:
@@ -376,11 +387,20 @@ Sorting:
 				-every subtree is also a heap.
 		-ReHeap Down Algorithm
 			-makes the "tree" a heap
+			-start at lowest level, right most parent. Whenever you do a swap remember to chase the swapped value down tree to maintain heap.
+				-repeatedly:
+					-swap root into its proper place
+					-use reheapdown to rebuild heap ignoring r
+						-simpler than it sounds. After building initial heap, just swap root into its final place, 
+										then reheap again with array size = array size - 1.
 		-size / 2 - 1 [integer arithmetic] -> finds index of lowest level, right most parent.
 
 	-Quicksort
 		-is a good candidate for multithreading
 		-outlier fixed in example
+		-final step: swap r and i + 1.
+			-i is l - 1
+			-left side should be less than new pivot, right should be larger.
 
 	-bubble sort
 		-n-1 passes
@@ -421,6 +441,8 @@ Sorting:
 				-in the range 0 <= A[i] < 1
 				-randomly distributed over that interval
 				-uses insertion sort (ususally n^2) to sort "buckets" of pre-sorted linked lists in arrays
+
+	-Binary tree sort: keep in mind that the array might get larger if impossible values are inserted during sort.
 -----------
 Graphs and misc (not on final):
 	-Superset of trees
